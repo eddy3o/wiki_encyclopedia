@@ -25,3 +25,15 @@ def results(request):
     return render(request, "encyclopedia/results.html", {
         "items": [i for i in entries if title in i]
     })
+
+def new(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        if (not util.get_entry(title)):
+            util.save_entry(title, request.POST.get('content'))
+            return redirect('wiki', entry=title)
+        else: 
+            return render(request, "encyclopedia/new.html", {
+                "error": "Entry already exists, try another title"
+            })
+    return render(request, "encyclopedia/new.html")

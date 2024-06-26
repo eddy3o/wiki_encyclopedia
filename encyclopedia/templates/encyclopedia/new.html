@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    New Page
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <h3 style="color:red;">
+            {{ error }}
+        </h3>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <h3>
+            Create a new page.
+        </h3>
+        <p style="margin-bottom:0;"><label for="title">Enter title</label></p>
+        <input id="title" name="title" required></input>
+        <p style="margin-bottom:0;"><label for="content">Enter content</label></p>
+        <textarea style="max-height: 600px;" id="content" name="content" required></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

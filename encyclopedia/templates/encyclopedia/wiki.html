@@ -8,4 +8,8 @@
     <div name="content" rows="5" cols="50" readonly>
         {{ content|safe }}
     </div><br>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Edit">
+    </form>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import markdown2
 
 from . import util
@@ -17,4 +17,11 @@ def wiki(request, entry):
         "content": content
     })
 
-
+def results(request):
+    title = request.GET.get('q', None)
+    if util.get_entry(title):
+        return redirect('wiki', entry=title)
+    entries = util.list_entries()
+    return render(request, "encyclopedia/results.html", {
+        "items": [i for i in entries if title in i]
+    })

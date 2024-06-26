@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    #path("wiki/", views.wiki, name="wiki")
-    path(r'wiki/<entry>', views.wiki, name="wiki")
-    # url(r'^(?P<username>\w+)/$', views.profile_page,),
+    path(r'wiki/<entry>', views.wiki, name="wiki"),
+    #re_path(r'^results/$', views.results, name="results")
+
+    re_path(r'^results/$', views.results, name="results")
 ]
